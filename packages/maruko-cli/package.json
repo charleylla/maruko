@@ -19,7 +19,7 @@
   },
   "keywords": [],
   "author": "Charleylla",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
     "colors": "^1.4.0",
     "commander": "^3.0.1",
@@ -28,5 +28,6 @@
     "name-styles": "^2.0.2",
     "ora": "^4.0.2",
     "shelljs": "^0.8.3"
-  }
+  },
+  "gitHead": "d2243b1cb3183152cd3384d0f76474124bf1f991"
 }
