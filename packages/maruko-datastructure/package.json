@@ -1,5 +1,5 @@
 {
-  "name": "@maruko/datastructure",
+  "name": "@charleylla/datastructure",
   "version": "1.0.3",
   "description": "",
   "main": "index.js",
@@ -16,5 +16,5 @@
   "keywords": [],
   "author": "Charleylla",
   "license": "MIT",
-  "gitHead": "d2243b1cb3183152cd3384d0f76474124bf1f991"
+  "gitHead": "25a84af853e781c6d106d28698c42364b4f6b10e"
 }

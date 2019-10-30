@@ -3,8 +3,8 @@
 
 ### Install
 ```
-npm install -g @maruko/cli
-yarn global add @maruko/cli
+npm install -g @charleylla/cli
+yarn global add @charleylla/cli
 ```
 
 ### View help information

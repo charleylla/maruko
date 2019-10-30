@@ -1,6 +1,6 @@
 {
-  "name": "@maruko/cli",
-  "version": "1.0.18",
+  "name": "@charleylla/cli",
+  "version": "1.0.15",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -29,5 +29,5 @@
     "ora": "^4.0.2",
     "shelljs": "^0.8.3"
   },
-  "gitHead": "d2243b1cb3183152cd3384d0f76474124bf1f991"
+  "gitHead": "25a84af853e781c6d106d28698c42364b4f6b10e"
 }
