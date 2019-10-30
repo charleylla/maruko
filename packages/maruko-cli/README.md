@@ -3,8 +3,8 @@
 
 ### Install
 ```
-npm install -g maruko-cli
-yarn global add maruko-cli
+npm install -g @maruko/cli
+yarn global add @maruko/cli
 ```
 
 ### View help information
