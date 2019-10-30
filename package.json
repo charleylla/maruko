@@ -1,6 +1,7 @@
 {
-  "name": "root",
+  "name": "maruko",
   "private": true,
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
