@@ -1,5 +1,5 @@
 {
-  "name": "@charleylla/cli",
+  "name": "@charleylla/maruko-cli",
   "version": "1.0.17",
   "description": "",
   "main": "index.js",
