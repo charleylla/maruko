@@ -290,7 +290,7 @@ run:
 
     const storeAlias = this.resolveAliasPath();
     // 是否为 components 组件目录
-    const isComponentsDir = storeAlias.startsWith('~/solution/');
+    const isComponentsDir = storeAlias.startsWith('~/solution/components');
     if(isComponentsDir){
       const importStr = `export { ${this.fileNameCap}Component } from '${storeAlias}/${componentDestDirName}/${this.fileName}.component';`;
       const componentModuleContentAfterImport = componentModuleComponent.replace(packageEndReg, importStr + '\n' + packageEndStr)
