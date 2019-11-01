@@ -1,5 +1,5 @@
 ## maruko
-### An engineering build tool
+### An engineering building tool
 
 ### Install
 ```
@@ -19,6 +19,13 @@ icb new <project-type> <project-name>
 maruko new <project-type> <project-name>
 ```
 
+see the currently supported project types below
+
+### Currently supported project type
+
+- [x] react
+- [ ] vue
+- [ ] flutter
 ### Usage
 ```
 🍉  🍉  Create Module  🍉  🍉
