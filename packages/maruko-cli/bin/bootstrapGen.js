@@ -49,7 +49,7 @@ run:
 
   // 初始化工程
   init(repo) {
-    
+    // 加载图标
     const spinner = ora('Download starter templates...\n').start();
 
     if (!shell.which('git')) {
@@ -63,6 +63,7 @@ run:
         spinner.succeed('Download starter templates...OK\n');
         const spinnerInstall = ora('Install dependiences...\n').start();
         shell.cd(this.fileName)
+        // 安装时 silent 运行，不阻塞 loading
         shell.exec(`npm install`, { silent:true },(code, stdout, stderr) => {
           if(code) spinnerInstall.fail(stderr)
           else spinnerInstall.succeed('Install dependiences...OK\n');

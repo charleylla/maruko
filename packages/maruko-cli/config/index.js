@@ -1,7 +1,9 @@
+const packageJson = require('../package.json')
+
 module.exports = {
   cliName: 'maruko',
   cliNameAlias: 'icb',
-  version: 'maruko v1.0.0',
+  version: `maruko v${packageJson.version}`,
   configName:'maruko-cli.json',
   projectTypes:[
     {

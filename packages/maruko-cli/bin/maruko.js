@@ -33,7 +33,7 @@ program
   .command('generate <file-type> <file-name>')
   .description('create project files, such as Module/Component/DTO/Enum/Service')
   .alias('g')
-  .action(function (d, otherD,cmd) {
+  .action(async function (d, otherD,cmd) {
     const result = config.commandTypes.find(v => {
       return v.command === d || v.alias === d;
     })
@@ -49,7 +49,7 @@ program
     }
 
     // 生成文件
-    new BootstrapGen(d,otherD,cmd).run()
+    await new BootstrapGen(d,otherD,cmd).run()
   })
 
 program.parse(process.argv);
