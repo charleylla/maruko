@@ -12,3 +12,5 @@ export class %_ComponentName_% extends React.Component<IProps> {
     return <div>Hello %_ComponentName_%</div>
   }
 }
+
+export default %_ComponentName_%;
