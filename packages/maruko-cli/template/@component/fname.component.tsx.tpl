@@ -6,11 +6,9 @@ import { IProps } from './fname.interface';
 
 @inject('%_StoreNameAttr_%')
 @observer
-export class %_ComponentName_% extends React.Component<IProps> {
+export default class %_ComponentName_% extends React.Component<IProps> {
   private readonly store: %_StoreName_% = this.props.%_StoreNameAttr_%;
   render(){
     return <div>Hello %_ComponentName_%</div>
   }
 }
-
-export default %_ComponentName_%;
