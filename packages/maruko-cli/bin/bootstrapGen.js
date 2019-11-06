@@ -173,12 +173,10 @@ run:
   // 获取 Module 下的 Routes 路径
   getModuleRoutesPath(path){
     const splitArr = path.split('pages');
-    console.log(splitArr)
     if(splitArr.length < 2){
       return '/' + this.fileName;
     }else{
       return splitArr[1]
-      // console.log(this.cwd)
     }
   }
 
@@ -390,10 +388,8 @@ run:
 
     shell.cd(destPath);
     shell.cp('-R', sourceDir, destPath);
-    console.log('yyyyyy')
 
     shell.ls().forEach(file => {
-    console.log(file)
       let destFileName = file;
       if (/^fname\.|\.tpl$/ig.test(file)) {
         destFileName = this.fileName + '.' + file.replace(/^fname\.|\.tpl$/ig, '');
@@ -405,7 +401,6 @@ run:
         shell.sed('-i', /%_ServiceName_%/g, this.fileNameCap + 'Service', destFileName);
       }catch(e){}
     })
-    console.log('xxxxxx')
     if (optional) {
       this.fileQueue.push(
         this.fileNameCap + '.service'
