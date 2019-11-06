@@ -1,6 +1,6 @@
 {
   "name": "@charleylla/maruko-cli",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "",
   "main": "index.js",
   "bin": {
