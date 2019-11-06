@@ -390,17 +390,22 @@ run:
 
     shell.cd(destPath);
     shell.cp('-R', sourceDir, destPath);
+    console.log('yyyyyy')
+
     shell.ls().forEach(file => {
+    console.log(file)
       let destFileName = file;
       if (/^fname\.|\.tpl$/ig.test(file)) {
         destFileName = this.fileName + '.' + file.replace(/^fname\.|\.tpl$/ig, '');
         shell.mv(file, destFileName)
       }
-      shell.sed('-i', /%_DtoName_%/g, this.fileNameCap, destFileName);
-      shell.sed('-i', /%_DtoPath_%/g, '../dto/' + this.fileName + '.dto', destFileName);
-      shell.sed('-i', /%_ServiceName_%/g, this.fileNameCap + 'Service', destFileName);
+      try{
+        shell.sed('-i', /%_DtoName_%/g, this.fileNameCap, destFileName);
+        shell.sed('-i', /%_DtoPath_%/g, '../dto/' + this.fileName + '.dto', destFileName);
+        shell.sed('-i', /%_ServiceName_%/g, this.fileNameCap + 'Service', destFileName);
+      }catch(e){}
     })
-
+    console.log('xxxxxx')
     if (optional) {
       this.fileQueue.push(
         this.fileNameCap + '.service'
