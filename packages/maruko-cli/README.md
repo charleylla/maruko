@@ -24,8 +24,10 @@ see the currently supported project types below
 ### Currently supported project type
 
 - [x] react
+- [x] react-hooks
 - [ ] vue
 - [ ] flutter
+
 ### Usage
 ```
 🍉  🍉  Create Module  🍉  🍉
@@ -77,4 +79,37 @@ Or use by the alias way:
 
 - maruko g s <your-service-name>
 - icb g s <your-service-name>
+```
+
+### Component Templates
+
+alse, you can choose the template of your component, we support the following template styles:
+
+- Mobx
+- React Hooks with useReducer
+- React Hooks with useState
+
+to create a component with a certain template, you can run ``` maruko g c <your-component-name> -t <component-type>```, we currently support the following component types:
+
+- mobx (or you can use the alias name 'm')
+- hooks-reducer (or you can use the alias name 'r')
+- hooks-state (or you can use the alias name 's')
+
+for example:
+
+```
+maruko g c test -t mobx
+maruko g c test -t hooks-reducer
+maruko g c test -t hooks-state
+
+or 
+
+maruko g c test -t m
+maruko g c test -t r
+maruko g c test -t s
+```
+
+the 'hooks-state' is the default template type, to use template with hooks-reducer, you can directly run:
+```
+maruko g c <your-component-name>
 ```

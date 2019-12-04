@@ -67,5 +67,19 @@ module.exports = {
       desc:'Create Service',
       prefix:'🍇',
     },
+  ],
+  options: [
+    {
+      option:'mobx',
+      aliasOption:'m'
+    },
+    {
+      option:'hooks-reducer',
+      aliasOption:'r'
+    },
+    {
+      option:'hooks-state',
+      aliasOption:'s'
+    }
   ]
 }
