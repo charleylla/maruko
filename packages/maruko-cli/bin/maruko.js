@@ -33,9 +33,15 @@ program
   .command('generate <file-type> <file-name>')
   .description('create project files, such as Module/Component/DTO/Enum/Service')
   .alias('g')
+  .option('-t --type [type]')
   .action(async function (d, otherD,cmd) {
+    const { type } = cmd;
     const result = config.commandTypes.find(v => {
       return v.command === d || v.alias === d;
+    })
+
+    const optionResult = config.options.find(v => {
+      return v.option === type || v.aliasOption === type;
     })
 
     // 匹配 Type
@@ -48,8 +54,13 @@ program
       throwError(`Missing parameter <name>,type '${config.cliName} -h' for more usages.`)
     }
 
+    // type 不合法
+    if(type && !optionResult) {
+      throwError(`Invalid option type '${type}',type '${config.cliName} -h' for more usages.`)
+    }
+
     // 生成文件
-    await new BootstrapGen(d,otherD,cmd).run()
+    await new BootstrapGen(d,otherD,cmd,optionResult).run()
   })
 
 program.parse(process.argv);

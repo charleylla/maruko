@@ -10,7 +10,7 @@ const config = require('../config')
 const { throwError } = require('./util')
 
 class BootstrapGen {
-  constructor(fileType, fileName, cmd) {
+  constructor(fileType, fileName, cmd, option = {}) {
     this.fileType = fileType;
     this.fileNameUpper = fileName.toUpperCase();
     this.fileNameCap = nameStyles.pascal(fileName);
@@ -19,6 +19,8 @@ class BootstrapGen {
 
     this.cmd = cmd;
     this.cwd = process.cwd().split(path.sep).join('/');
+    // option 选项
+    this.option = option
 
     this.templatePath = path.resolve(__dirname, '../template');
     this.rootDir = null;
@@ -68,6 +70,8 @@ run:
           if(code) spinnerInstall.fail(stderr)
           else spinnerInstall.succeed('Install dependiences...OK\n');
           shell.rm('-rf','.git')
+          // 执行 GIT 初始化操作
+          shell.exec('git init')
           // 打印说明
           console.log(
             cowsay.say({
@@ -214,8 +218,11 @@ run:
   }
 
   async componentGen(destPath) {
+    const { option } = this.option
+    const optionTypeDest = option ? '@' + option : '@hooks-state'
+
     // 生成组件
-    const sourceDir = this.templatePath + '/@component/*';
+    const sourceDir = this.templatePath + '/@component/' + optionTypeDest + '/*';
     const destDirName = this.fileName + '-component';
     const destDir = destPath + '/' + destDirName;
     let destStoreName = '';
@@ -226,7 +233,11 @@ run:
     shell.mkdir(destDirName);
     shell.cp('-R', sourceDir, destDir);
     shell.cd(destDirName);
+
+    // 通用模板处理
     shell.ls().forEach(file => {
+      // 不处理  store，这是一个目录，sed 会报错
+      if(file == 'store') return;
       let destFileName = file;
       if (/^fname\.|\.tpl$/ig.test(file)) {
         destFileName = this.fileName + '.' + file.replace(/^fname\.|\.tpl$/ig, '');
@@ -235,21 +246,45 @@ run:
           destStoreName = destFileName;
         }
       }
-      // component less
-      shell.sed('-i', /%_ComponentName_%/g, this.fileNameCap + 'Component', destFileName);
-      // store
-      shell.sed('-i', /%_StoreName_%/g, this.fileNameCap + 'Store', destFileName);
-      shell.sed('-i', /%_StoreNameAttr_%/g, this.fileNameCamel + 'Store', destFileName);
-
-      // 文件名
-      shell.sed('-i', /\.\/fname/g, './' + this.fileName, destFileName);
+      this.sedTemplate(destFileName)
     })
 
-    // 自动注入 Store
-    await this.storeGen(destDirName, destStoreName);
+     // 处理 hooks reducer 的 store
+     if(option == 'hooks-reducer'){
+      shell.cd('store')
+      shell.ls().forEach(storeFile => {
+        const storeDestFileName = storeFile.replace(/^fname\.|\.tpl$/ig, '');
+        shell.mv(storeFile, storeDestFileName)
+        this.sedTemplate(storeDestFileName)
+      })
+    }
+
+    // 只有 mobx 自动注入  store
+    if(option == 'mobx'){
+      // 自动注入 Store
+      await this.storeGen(destDirName, destStoreName);
+    }
   }
 
-  resolveAliasPath(){
+  sedTemplate(destFileName) {
+    // component less
+    shell.sed('-i', /%_ComponentName_%/g, this.fileNameCap + 'Component', destFileName);
+    // store
+    shell.sed('-i', /%_StoreName_%/g, this.fileNameCap + 'Store', destFileName);
+    shell.sed('-i', /%_StoreNameAttr_%/g, this.fileNameCamel + 'Store', destFileName);
+    // 文件名
+    shell.sed('-i', /\.\/fname/g, './' + this.fileName, destFileName);
+    // TYPES 前缀
+    const typesPrefix = `__${this.fileName}_COMPONENT_`.toUpperCase()
+    shell.sed('-i', /%_StorePrefixName_%/g, typesPrefix, destFileName);
+
+    // state Hooks 的 store 名
+    shell.sed('-i', /%_HooksStateStoreName_%/g, `use${this.fileNameCap}Store`, destFileName);
+    // state Hooks 的 state inteface 名
+    shell.sed('-i', /%_HooksStateInterfaceName_%/g, `I${this.fileNameCap}State`, destFileName);
+  }
+
+  resolveAliasPath() {
     let framePaths = this.destPath.split('framework')
     let soluctionPaths = this.destPath.split('solution')
     let path = '';
@@ -271,7 +306,7 @@ run:
     // 导入的文件不要后缀
     destStoreName = destStoreName.replace('.ts','');
     const storeDir = this.rootDir + '/src/' + config.pathSuffix.store.validPaths[0]
-    const storePath = storeDir + '/store.all.ts';
+    const storePath = storeDir + '/mobx.store.ts';
     // component.module.ts 路径
     const componentModuleDir = this.rootDir + '/src/' + config.pathSuffix.component.validPaths[1]
     const componentModulePath = componentModuleDir + '/component.module.ts';
