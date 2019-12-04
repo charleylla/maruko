@@ -3,12 +3,14 @@
 ### An engineering building tool
 
 ### Install
+
 ```
 npm install -g @charleylla/maruko-cli
 yarn global add @charleylla/maruko-cli
 ```
 
 ### View help information
+
 ```
 maruko -h
 icb -h
@@ -30,6 +32,7 @@ See the currently supported project types below
 - [ ] flutter
 
 ### Usage
+
 ```
 🍉  🍉  Create Module  🍉  🍉
 
