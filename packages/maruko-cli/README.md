@@ -1,4 +1,5 @@
 ## maruko
+
 ### An engineering building tool
 
 ### Install
@@ -19,7 +20,7 @@ icb new <project-type> <project-name>
 maruko new <project-type> <project-name>
 ```
 
-see the currently supported project types below
+See the currently supported project types below
 
 ### Currently supported project type
 
@@ -83,19 +84,19 @@ Or use by the alias way:
 
 ### Component Templates
 
-alse, you can choose the template of your component, we support the following template styles:
+Also, you can choose the template of your component, we support the following template styles:
 
 - Mobx
 - React Hooks with useReducer
 - React Hooks with useState
 
-to create a component with a certain template, you can run ``` maruko g c <your-component-name> -t <component-type>```, we currently support the following component types:
+To create a component with a certain template, you can run ``` maruko g c <your-component-name> -t <component-type>```, we currently support the following component types:
 
 - mobx (or you can use the alias name 'm')
 - hooks-reducer (or you can use the alias name 'r')
 - hooks-state (or you can use the alias name 's')
 
-for example:
+For example:
 
 ```
 maruko g c test -t mobx
@@ -109,7 +110,7 @@ maruko g c test -t r
 maruko g c test -t s
 ```
 
-the 'hooks-state' is the default template type, to use template with hooks-reducer, you can directly run:
+The 'hooks-state' is the default template type, to use template with hooks-state, you can directly run:
 ```
 maruko g c <your-component-name>
 ```
